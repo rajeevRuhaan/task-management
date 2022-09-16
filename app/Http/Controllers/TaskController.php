@@ -45,6 +45,9 @@ class TaskController extends Controller
         $tasks->title = $request->title;
         $tasks->des = $request->des;
         $tasks->save();
+
+        notify()->success('Successfully task added to Db.');
+        
         return redirect('task');
         
     }
@@ -102,6 +105,7 @@ class TaskController extends Controller
         $task = new Task();
         $task = $task->WHERE('id', $id)->first();
         $task->delete();
+        notify()->success('Successfully task deleted from Db. 👍');
         return redirect('task');
         
     }
