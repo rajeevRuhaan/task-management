@@ -1,3 +1,4 @@
+@extends('../layouts.app')
 <!doctype html>
 <html lang="en">
 
@@ -71,11 +72,10 @@
                                         </div>
                                 </td>
                             </tr>
-                            @endforeach
-                            
-                            
+                            @endforeach 
                         </tbody>
                     </table>
+                    {{$tasks->links()}}
                 </div>
                 <div class="card-footer text-muted">
                     Footer

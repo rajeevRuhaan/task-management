@@ -14,14 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-/* Route::get('/createtask', function () {
-    return view('createtask');
-});
-Route::get('/managetask', function () {
-    return view('managetask');
-}); */
 
+ Auth::routes(); 
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('task', 'App\Http\Controllers\TaskController');
