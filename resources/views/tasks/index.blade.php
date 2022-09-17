@@ -21,6 +21,7 @@
         <div class="row">
             <div class="card" style="margin:10px auto;">
                 <a  class="btn btn-primary" href="{{route('task.create')}}" role="button">Create Task</a>
+                <a class="btn btn-secondary" href="{{route('createpdf')}}" role="button">Generate PDF</a>
                 <div class="card-header">
                     Manage Task
                 </div>

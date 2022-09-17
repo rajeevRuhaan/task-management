@@ -51,6 +51,45 @@ $ composer dump-autoload
 <x:notify-messages />
 @include('notify::components.notify')
 ```
+where ever you need notification you can use this :
+notify()->success('Laravel Notify is awesome!')
+
+### Laravel HTML to PDF converter
+Require this package in your composer.json and update composer.
+ install package
+ ```code
+composer require barryvdh/laravel-dompdf
+```
+After installation add the following lines to register provider config/app.php
+```code
+$app->register(\Barryvdh\DomPDF\ServiceProvider::class);
+```
+into aliases config/app.php
+```code
+'PDF' => \Barryvdh\DomPDF\Facade::class,
+```
+Vendor publish by runing this comand in terminal this will create dompdf.php inside config. You can change some default setting
+```code
+ php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+```
+In route specify controller and function
+```code
+Route::get('/task/generate/pdf', 'App\Http\Controllers\TaskController@createpdf')->name('createpdf');
+```
+lastly in controller call in header *use PDF*  and make public function createpdf(){}
+```code
+use Barryvdh\DomPDF\Facade\Pdf;
+
+public function createpdf() {
+        
+        $task = new Task();
+        $task = $task->all();
+        $pdf = PDF::loadView('tasks.generatepdf',['task' => $task]); 
+        
+    
+        return $pdf->download('tasks.pdf');
+    }
+```
 
 
 ![Task Management](public/uploads/task-management.png)

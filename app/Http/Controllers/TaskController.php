@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TaskController extends Controller
 {
@@ -108,5 +109,18 @@ class TaskController extends Controller
         notify()->success('Successfully task deleted from Db. 👍');
         return redirect('task');
         
+    }
+    /* 
+    * Create pdf function
+    *
+     */
+    public function createpdf() {
+        
+        $task = new Task();
+        $task = $task->all();
+        $pdf = PDF::loadView('tasks.generatepdf',['task' => $task]); 
+        
+    
+        return $pdf->download('tasks.pdf');
     }
 }
